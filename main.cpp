@@ -2,6 +2,7 @@
 
 #include "camera.h"
 #include "grid.h"
+#include "debugText.h"
 
 using namespace std;
 
@@ -10,35 +11,18 @@ int screenHeight = 700;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
-Camera camera(0, 0, screenWidth, screenHeight, &window);
-sf::Vector2f getOffset();
-
-Grid grid(&window, screenWidth, screenHeight);
-
 sf::Event event;
 void EventHandler();
-
 bool keys[1024];
 sf::Vector2i mousePos(0, 0);
-sf::Text tMousePos;
-sf::Font font;
-sf::Color debugCol(110, 50, 100, 200);
 
-void init()
-{
-    if (!font.loadFromFile("arial.ttf")) {
-        throw;
-    }
-
-    tMousePos.setFont(font);
-    tMousePos.setCharacterSize(16);
-    tMousePos.setFillColor(debugCol);
-}
+sf::Vector2f getOffset();
+Camera camera(0, 0, screenWidth, screenHeight, &window);
+Grid grid(&window, screenWidth, screenHeight);
+DebugText debugText(&window);
 
 int main()
 {
-    init();
-
     window.setFramerateLimit(60);
     while (window.isOpen())
     {
@@ -51,8 +35,7 @@ int main()
         grid.Render();
 
         window.setView(window.getDefaultView());
-        tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
-        window.draw(tMousePos);
+        debugText.Render("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
 
         window.display();
     }
