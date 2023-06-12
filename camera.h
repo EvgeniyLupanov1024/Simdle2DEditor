@@ -15,9 +15,12 @@ class Camera
         float mass;
         float resistanceMovement;
 
+        float zoom;
+
     public:
         Camera(float positionX, float positionY, float sizeX, float sizeY, sf::RenderWindow *window);
-        void update(sf::Vector2f acceleration);
+        void Update(sf::Vector2f acceleration);
+        void Zoom(float zoomModule);
 };
 
 #endif

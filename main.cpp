@@ -9,7 +9,7 @@ int screenHeight = 600;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
-Camera camera(screenWidth / 2, screenWidth / 2, screenWidth, screenHeight, &window);
+Camera camera(0, 0, screenWidth, screenHeight, &window);
 sf::Vector2f getOffset();
 
 sf::Event event;
@@ -46,7 +46,7 @@ int main()
         tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
         window.draw(tMousePos);
         
-        camera.update(getOffset());
+        camera.Update(getOffset());
 
         window.display();
     }
@@ -100,9 +100,7 @@ void EventHandler()
 
         case sf::Event::MouseWheelScrolled:
         {
-            // event.mouseWheelScroll.delta;
-            // event.mouseWheelScroll.x;
-            // event.mouseWheelScroll.y; --
+            camera.Zoom(event.mouseWheelScroll.delta);
             break; 
         }
         

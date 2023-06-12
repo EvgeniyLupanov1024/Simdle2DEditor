@@ -7,8 +7,10 @@ Camera::Camera(float positionX, float positionY, float sizeX, float sizeY, sf::R
     this->view.setSize(sf::Vector2f(sizeX, sizeY));
 
     this->speedMovement = sf::Vector2f(0.f, 0.f);
-    this->mass = 5.f;
-    this->resistanceMovement = 1.1f;
+    this->mass = 1.f;
+    this->resistanceMovement = 1.15f;
+
+    this->zoom = 1.f;
 
     window->setView(this->view);
 }
@@ -22,11 +24,16 @@ sf::Vector2f normalize(const sf::Vector2f& source)
         return source;
 }
 
-void Camera::update(sf::Vector2f acceleration)
+void Camera::Update(sf::Vector2f acceleration)
 {
-    speedMovement += normalize(acceleration) / mass;
+    speedMovement += normalize(acceleration) * zoom * zoom / mass;
     view.move(speedMovement);
     speedMovement /= resistanceMovement;
 
     window->setView(this->view);
+}
+
+void Camera::Zoom(float zoomModule)
+{
+    view.zoom(zoom + zoomModule * 0.1);
 }
