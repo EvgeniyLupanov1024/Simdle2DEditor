@@ -1,16 +1,19 @@
 #include <SFML/Graphics.hpp>
 
 #include "camera.h"
+#include "grid.h"
 
 using namespace std;
 
-int screenWidth = 900;
-int screenHeight = 600;
+int screenWidth = 1000;
+int screenHeight = 700;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
 Camera camera(0, 0, screenWidth, screenHeight, &window);
 sf::Vector2f getOffset();
+
+Grid grid(&window, screenWidth, screenHeight);
 
 sf::Event event;
 void EventHandler();
@@ -21,24 +24,8 @@ sf::Text tMousePos;
 sf::Font font;
 sf::Color debugCol(110, 50, 100, 200);
 
-sf::Texture texture;
-sf::Sprite sprite;
-float scale(3.3f);
-
 void init()
 {
-    if (!texture.loadFromFile("grid.jpg", sf::IntRect(
-            -screenWidth * scale / 2, 
-            -screenHeight * scale / 2, 
-            screenWidth * scale, 
-            screenHeight * scale)
-        )) {
-        throw;
-    }
-    sprite.setTexture(texture);
-    sprite.setPosition(sf::Vector2f(-screenWidth/2, -screenHeight/2));
-    sprite.scale(1/scale, 1/scale);
-
     if (!font.loadFromFile("arial.ttf")) {
         throw;
     }
@@ -60,7 +47,8 @@ int main()
         window.clear(backgroundColor);
         
         camera.Update(getOffset());
-        window.draw(sprite);
+        
+        grid.Render();
 
         window.setView(window.getDefaultView());
         tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
