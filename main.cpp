@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#include "camera.h"
+
 using namespace std;
 
 int screenWidth = 900;
@@ -7,9 +9,8 @@ int screenHeight = 600;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
-sf::View camera (sf::FloatRect(0.f, 0.f, screenWidth, screenHeight));
-sf::Vector2i cameraOffsetPosition(0, 0); 
-void updateCameraOffsetPosition();
+Camera camera(screenWidth / 2, screenWidth / 2, screenWidth, screenHeight, &window);
+sf::Vector2f getOffset();
 
 sf::Event event;
 void EventHandler();
@@ -22,8 +23,6 @@ sf::Color debugCol(110, 50, 100, 200);
 
 void init()
 {
-    window.setView(camera);
-
     if (!font.loadFromFile("arial.ttf")) {
         throw;
     }
@@ -46,8 +45,7 @@ int main()
         tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
         window.draw(tMousePos);
         
-        window.setView(camera);
-        updateCameraOffsetPosition();
+        camera.update(getOffset());
 
         window.display();
     }
@@ -113,12 +111,10 @@ void EventHandler()
     }
 }
 
-void updateCameraOffsetPosition()
+sf::Vector2f getOffset()
 {
-    cameraOffsetPosition = sf::Vector2i(
+    return sf::Vector2f(
         (keys[sf::Keyboard::Right] || keys[sf::Keyboard::D]) - (keys[sf::Keyboard::Left] || keys[sf::Keyboard::A]),
         (keys[sf::Keyboard::Down] || keys[sf::Keyboard::S]) - (keys[sf::Keyboard::Up] || keys[sf::Keyboard::W])
     );
-
-    camera.move(cameraOffsetPosition.x * 0.01f, cameraOffsetPosition.y * 0.01f);
 }
