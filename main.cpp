@@ -21,8 +21,24 @@ sf::Text tMousePos;
 sf::Font font;
 sf::Color debugCol(110, 50, 100, 200);
 
+sf::Texture texture;
+sf::Sprite sprite;
+float scale(3.3f);
+
 void init()
 {
+    if (!texture.loadFromFile("grid.jpg", sf::IntRect(
+            -screenWidth * scale / 2, 
+            -screenHeight * scale / 2, 
+            screenWidth * scale, 
+            screenHeight * scale)
+        )) {
+        throw;
+    }
+    sprite.setTexture(texture);
+    sprite.setPosition(sf::Vector2f(-screenWidth/2, -screenHeight/2));
+    sprite.scale(1/scale, 1/scale);
+
     if (!font.loadFromFile("arial.ttf")) {
         throw;
     }
@@ -42,11 +58,13 @@ int main()
         EventHandler();
 
         window.clear(backgroundColor);
-
-        tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
-        window.draw(tMousePos);
         
         camera.Update(getOffset());
+        window.draw(sprite);
+
+        window.setView(window.getDefaultView());
+        tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
+        window.draw(tMousePos);
 
         window.display();
     }
