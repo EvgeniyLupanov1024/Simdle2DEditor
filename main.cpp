@@ -36,6 +36,7 @@ int main()
 {
     init();
 
+    window.setFramerateLimit(60);
     while (window.isOpen())
     {
         EventHandler();

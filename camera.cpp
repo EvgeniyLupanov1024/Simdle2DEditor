@@ -7,8 +7,8 @@ Camera::Camera(float positionX, float positionY, float sizeX, float sizeY, sf::R
     this->view.setSize(sf::Vector2f(sizeX, sizeY));
 
     this->speedMovement = sf::Vector2f(0.f, 0.f);
-    this->mass = 100.f;
-    this->resistanceMovement = 1.05f;
+    this->mass = 5.f;
+    this->resistanceMovement = 1.1f;
 
     window->setView(this->view);
 }
