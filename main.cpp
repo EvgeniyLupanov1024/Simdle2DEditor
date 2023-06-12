@@ -7,9 +7,14 @@ int screenHeight = 600;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
+sf::View camera (sf::FloatRect(0.f, 0.f, screenWidth, screenHeight));
+sf::Vector2i cameraOffsetPosition(0, 0); 
+void updateCameraOffsetPosition();
+
 sf::Event event;
 void EventHandler();
 
+bool keys[1024];
 sf::Vector2i mousePos(0, 0);
 sf::Text tMousePos;
 sf::Font font;
@@ -17,6 +22,8 @@ sf::Color debugCol(110, 50, 100, 200);
 
 void init()
 {
+    window.setView(camera);
+
     if (!font.loadFromFile("arial.ttf")) {
         throw;
     }
@@ -39,6 +46,9 @@ int main()
         tMousePos.setString("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
         window.draw(tMousePos);
         
+        window.setView(camera);
+        updateCameraOffsetPosition();
+
         window.display();
     }
 
@@ -67,6 +77,12 @@ void EventHandler()
             if (event.key.code == sf::Keyboard::Escape) {
                 window.close();
             }
+
+            keys[event.key.code] = true;
+            break;
+
+        case sf::Event::KeyReleased:
+            keys[event.key.code] = false;
             break;
 
         case sf::Event::MouseMoved:
@@ -95,4 +111,14 @@ void EventHandler()
             break;
         }
     }
+}
+
+void updateCameraOffsetPosition()
+{
+    cameraOffsetPosition = sf::Vector2i(
+        (keys[sf::Keyboard::Right] || keys[sf::Keyboard::D]) - (keys[sf::Keyboard::Left] || keys[sf::Keyboard::A]),
+        (keys[sf::Keyboard::Down] || keys[sf::Keyboard::S]) - (keys[sf::Keyboard::Up] || keys[sf::Keyboard::W])
+    );
+
+    camera.move(cameraOffsetPosition.x * 0.01f, cameraOffsetPosition.y * 0.01f);
 }
