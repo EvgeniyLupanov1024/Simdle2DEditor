@@ -1,5 +1,5 @@
-#ifndef DEBUG_TEXT_H
-#define DEBUG_TEXT_H
+#ifndef DEBUG_TEXT_HPP
+#define DEBUG_TEXT_HPP
 
 #include <SFML/Graphics.hpp>
 

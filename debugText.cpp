@@ -1,4 +1,4 @@
-#include "debugText.h"
+#include "debugText.hpp"
 
 DebugText::DebugText(sf::RenderWindow *window)
 {

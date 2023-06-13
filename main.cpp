@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-#include "camera.h"
-#include "grid.h"
-#include "debugText.h"
+#include "camera.hpp"
+#include "grid.hpp"
+#include "debugText.hpp"
 
 using namespace std;
 

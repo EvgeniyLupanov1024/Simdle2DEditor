@@ -1,5 +1,5 @@
-#ifndef GRID_H
-#define GRID_H
+#ifndef GRID_HPP
+#define GRID_HPP
 
 #include <SFML/Graphics.hpp>
 

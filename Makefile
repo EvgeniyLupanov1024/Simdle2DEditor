@@ -9,11 +9,11 @@ ${OUT_NAME}: main.o camera.o grid.o debugText.o
 main.o: main.cpp
 	g++ -c main.cpp
 
-camera.o: camera.cpp camera.h
+camera.o: camera.cpp camera.hpp
 	g++ -c camera.cpp
 
-grid.o: grid.cpp grid.h
+grid.o: grid.cpp grid.hpp
 	g++ -c grid.cpp
 
-debugText.o: debugText.cpp debugText.h
+debugText.o: debugText.cpp debugText.hpp
 	g++ -c debugText.cpp

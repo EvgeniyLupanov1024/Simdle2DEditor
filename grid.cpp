@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "grid.hpp"
 
 Grid::Grid(sf::RenderWindow *window, float width, float height)
 {

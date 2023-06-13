@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "camera.hpp"
 
 Camera::Camera(float positionX, float positionY, float sizeX, float sizeY, sf::RenderWindow *window)
 {
