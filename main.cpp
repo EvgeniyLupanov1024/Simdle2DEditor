@@ -4,6 +4,7 @@
 #include "camera.hpp"
 #include "grid.hpp"
 #include "debugText.hpp"
+#include "scene.hpp"
 #include "rectangle.hpp"
 
 using namespace std;
@@ -23,7 +24,7 @@ Camera camera(0, 0, screenWidth, screenHeight, &window);
 
 Grid grid(&window, screenWidth, screenHeight);
 DebugText debugText(&window);
-Rectangle rectangle(&window, sf::Vector2f());
+Scene scene;
 
 int main()
 {
@@ -37,7 +38,7 @@ int main()
         camera.Update(getOffset());
         
         grid.Render();
-        rectangle.Render();
+        scene.Render();
 
         window.setView(window.getDefaultView());
         debugText.Render("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
@@ -89,10 +90,8 @@ void EventHandler()
         {
             window.setView(camera.view);
             sf::Vector2f worldCoord = window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
-            rectangle = *new Rectangle(&window, worldCoord);
 
-            // event.mouseButton.x;
-            // event.mouseButton.y;
+            scene.AddObject(new Rectangle(&window, worldCoord));
             break; 
         }
 
