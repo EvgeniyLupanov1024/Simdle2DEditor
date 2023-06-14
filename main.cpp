@@ -3,6 +3,7 @@
 #include "camera.hpp"
 #include "grid.hpp"
 #include "debugText.hpp"
+#include "rectangle.hpp"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ Camera camera(0, 0, screenWidth, screenHeight, &window);
 
 Grid grid(&window, screenWidth, screenHeight);
 DebugText debugText(&window);
+Rectangle rectangle(&window);
 
 int main()
 {
@@ -34,6 +36,7 @@ int main()
         camera.Update(getOffset());
         
         grid.Render();
+        rectangle.Render();
 
         window.setView(window.getDefaultView());
         debugText.Render("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
