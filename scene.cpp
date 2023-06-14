@@ -19,7 +19,11 @@ void Scene::Render()
 void Scene::RemoveLastObject()
 {
     if (renderable.size() > 0) {
-        delete renderable.back();
+        Object *obj = renderable.back();
+        if (obj->status == UpdateStatus::EndUpdate) {
+            delete obj;
+        }
+
         renderable.pop_back();
     }
 }

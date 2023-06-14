@@ -6,11 +6,12 @@
 #include "debugText.hpp"
 #include "scene.hpp"
 #include "rectangle.hpp"
+#include "flower.hpp"
 
 using namespace std;
 
-int screenWidth = 1000;
-int screenHeight = 700;
+int screenWidth = 1500;
+int screenHeight = 900;
 sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Best editor");
 sf::Color backgroundColor(250, 230, 200, 255);
 
@@ -31,7 +32,7 @@ enum class DrawMode
     rectangle,
     flower
 };
-DrawMode drawMode = DrawMode::rectangle;
+DrawMode drawMode = DrawMode::flower;
 
 int main()
 {
@@ -127,6 +128,7 @@ void EventHandler()
                 break;
 
             case DrawMode::flower :
+                scene.AddObject(new Flower(&window, worldCoord));
                 break;
             
             default:

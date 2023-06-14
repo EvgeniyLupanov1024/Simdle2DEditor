@@ -2,7 +2,6 @@
 #define SCENE_HPP
 
 #include "object.hpp"
-#include <vector>
 #include <list>
 
 using namespace std;
@@ -10,7 +9,7 @@ using namespace std;
 class Scene
 {
     private:
-        vector<Object*> renderable;
+        list<Object*> renderable;
         list<Object*> updateable;
 
     public:
