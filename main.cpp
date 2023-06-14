@@ -18,6 +18,7 @@ sf::Vector2i mousePos(0, 0);
 
 sf::Vector2f getOffset();
 Camera camera(0, 0, screenWidth, screenHeight, &window);
+
 Grid grid(&window, screenWidth, screenHeight);
 DebugText debugText(&window);
 
