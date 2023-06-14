@@ -23,3 +23,23 @@ void Scene::RemoveLastObject()
         renderable.pop_back();
     }
 }
+
+void Scene::Update()
+{
+    for (auto iterObj = updateable.begin(); iterObj != updateable.end(); ++iterObj)
+    {
+        switch ((*iterObj)->status)
+        {
+        case UpdateStatus::Update:
+            (*iterObj)->Update();
+            break;
+
+        case UpdateStatus::EndUpdate:
+            iterObj = updateable.erase(iterObj);
+            break;
+        
+        default:
+            break;
+        }
+    }
+}

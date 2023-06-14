@@ -39,6 +39,7 @@ int main()
         
         grid.Render();
         scene.Render();
+        scene.Update();
 
         window.setView(window.getDefaultView());
         debugText.Render("x:" + to_string(mousePos.x) + "| y:" + to_string(mousePos.y));
