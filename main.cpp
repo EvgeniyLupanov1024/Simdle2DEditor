@@ -26,6 +26,13 @@ Grid grid(&window, screenWidth, screenHeight);
 DebugText debugText(&window);
 Scene scene;
 
+enum class DrawMode
+{
+    rectangle,
+    flower
+};
+DrawMode drawMode = DrawMode::rectangle;
+
 int main()
 {
     window.setFramerateLimit(60);
@@ -75,9 +82,26 @@ void EventHandler()
 
             keys[event.key.code] = true;
 
-            if (keys[sf::Keyboard::LControl] && (event.key.code == sf::Keyboard::Z)) {
-                scene.RemoveLastObject();
+            switch (event.key.code)
+            {
+            case sf::Keyboard::Z:
+                if (keys[sf::Keyboard::LControl]) {
+                    scene.RemoveLastObject();
+                }
+                break;
+
+            case sf::Keyboard::R:
+                drawMode = DrawMode::rectangle;
+                break;
+
+            case sf::Keyboard::F:
+                drawMode = DrawMode::flower;
+                break;
+            
+            default:
+                break;
             }
+
             break;
 
         case sf::Event::KeyReleased:
@@ -96,7 +120,20 @@ void EventHandler()
             window.setView(camera.view);
             sf::Vector2f worldCoord = window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
 
-            scene.AddObject(new Rectangle(&window, worldCoord));
+            switch (drawMode)
+            {
+            case DrawMode::rectangle :
+                scene.AddObject(new Rectangle(&window, worldCoord));
+                break;
+
+            case DrawMode::flower :
+                break;
+            
+            default:
+                break;
+            }
+
+            
             break; 
         }
 
