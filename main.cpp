@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 #include "camera.hpp"
 #include "grid.hpp"
@@ -22,7 +23,7 @@ Camera camera(0, 0, screenWidth, screenHeight, &window);
 
 Grid grid(&window, screenWidth, screenHeight);
 DebugText debugText(&window);
-Rectangle rectangle(&window);
+Rectangle rectangle(&window, sf::Vector2f());
 
 int main()
 {
@@ -32,7 +33,7 @@ int main()
         EventHandler();
 
         window.clear(backgroundColor);
-        
+
         camera.Update(getOffset());
         
         grid.Render();
@@ -86,6 +87,10 @@ void EventHandler()
 
         case sf::Event::MouseButtonPressed:
         {
+            window.setView(camera.view);
+            sf::Vector2f worldCoord = window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+            rectangle = *new Rectangle(&window, worldCoord);
+
             // event.mouseButton.x;
             // event.mouseButton.y;
             break; 

@@ -8,7 +8,6 @@ class Camera
 {
     private:
         sf::RenderWindow *window;
-        sf::View view;
 
         sf::Vector2f speedMovement;
         float mass;
@@ -17,6 +16,8 @@ class Camera
         float zoom;
 
     public:
+        sf::View view;
+
         Camera(float positionX, float positionY, float sizeX, float sizeY, sf::RenderWindow *window);
         void Update(sf::Vector2f acceleration);
         void Zoom(float zoomModule);

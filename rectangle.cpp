@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 
-Rectangle::Rectangle(sf::RenderWindow *window)
+Rectangle::Rectangle(sf::RenderWindow *window, sf::Vector2f pos)
 {
     this->window = window;
 
@@ -8,6 +8,7 @@ Rectangle::Rectangle(sf::RenderWindow *window)
     rectangle.setFillColor(sf::Color(220, 50, 40, 240));
     rectangle.setOutlineThickness(2.f);
     rectangle.setOutlineColor(sf::Color(250, 150, 100));
+    rectangle.setPosition(pos);
 }
 
 void Rectangle::Render()

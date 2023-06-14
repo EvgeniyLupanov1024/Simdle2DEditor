@@ -10,7 +10,7 @@ class Rectangle
         sf::RectangleShape rectangle;
 
     public:
-        Rectangle(sf::RenderWindow *window);
+        Rectangle(sf::RenderWindow *window, sf::Vector2f pos);
         void Render();
 };
 
