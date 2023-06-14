@@ -2,8 +2,9 @@
 #define RECTANGLE_HPP
 
 #include <SFML/Graphics.hpp>
+#include "object.hpp"
 
-class Rectangle
+class Rectangle : public Object
 {
     private:
         sf::RenderWindow *window;
@@ -11,7 +12,7 @@ class Rectangle
 
     public:
         Rectangle(sf::RenderWindow *window, sf::Vector2f pos);
-        void Render();
+        void Render() override;
 };
 
 #endif

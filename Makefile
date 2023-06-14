@@ -18,6 +18,5 @@ grid.o: grid.cpp grid.hpp
 debugText.o: debugText.cpp debugText.hpp
 	g++ -c debugText.cpp
 
-rectangle.o: rectangle.cpp rectangle.hpp
+rectangle.o: rectangle.cpp rectangle.hpp object.hpp
 	g++ -c rectangle.cpp
-
