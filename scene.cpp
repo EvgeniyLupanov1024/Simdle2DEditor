@@ -2,12 +2,15 @@
 
 void Scene::AddObject(Object *object)
 {
-    objects.push_back(object);
+    renderable.push_back(object);
+    if (object->status == UpdateStatus::Update) {
+        updateable.push_back(object);
+    }
 }
         
 void Scene::Render()
 {
-    for (Object *object : objects)
+    for (Object *object : renderable)
     {
         object->Render();
     }
@@ -15,8 +18,8 @@ void Scene::Render()
 
 void Scene::RemoveLastObject()
 {
-    if (objects.size() > 0) {
-        delete objects.back();
-        objects.pop_back();
+    if (renderable.size() > 0) {
+        delete renderable.back();
+        renderable.pop_back();
     }
 }

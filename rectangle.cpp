@@ -9,9 +9,15 @@ Rectangle::Rectangle(sf::RenderWindow *window, sf::Vector2f pos)
     rectangle.setOutlineThickness(2.f);
     rectangle.setOutlineColor(sf::Color(250, 150, 100));
     rectangle.setPosition(pos);
+
+    Object::status = UpdateStatus::Update;
 }
 
 void Rectangle::Render()
 {
     window->draw(rectangle);
+}
+
+void Rectangle::Update()
+{
 }

@@ -9,7 +9,8 @@ using namespace std;
 class Scene
 {
     private:
-        vector<Object*> objects;
+        vector<Object*> renderable;
+        vector<Object*> updateable;
 
     public:
         void AddObject(Object *object);

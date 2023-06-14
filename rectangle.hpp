@@ -13,6 +13,7 @@ class Rectangle : public Object
     public:
         Rectangle(sf::RenderWindow *window, sf::Vector2f pos);
         void Render() override;
+        void Update() override;
 };
 
 #endif
