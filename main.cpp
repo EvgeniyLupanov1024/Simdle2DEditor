@@ -73,6 +73,10 @@ void EventHandler()
             }
 
             keys[event.key.code] = true;
+
+            if (keys[sf::Keyboard::LControl] && (event.key.code == sf::Keyboard::Z)) {
+                scene.RemoveLastObject();
+            }
             break;
 
         case sf::Event::KeyReleased:

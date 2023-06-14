@@ -13,6 +13,7 @@ class Scene
 
     public:
         void AddObject(Object *object);
+        void RemoveLastObject();
         void Render();
 };
 

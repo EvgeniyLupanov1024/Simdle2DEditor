@@ -12,3 +12,11 @@ void Scene::Render()
         object->Render();
     }
 }
+
+void Scene::RemoveLastObject()
+{
+    if (objects.size() > 0) {
+        delete objects.back();
+        objects.pop_back();
+    }
+}
