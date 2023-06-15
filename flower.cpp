@@ -4,6 +4,8 @@ void Flower::FloverBack()
 {
     float size = commonSize * 0.9f;
     tBackLeaf.scale(0, 0);
+    deviationAngleBack = 80;
+    currentDeviationAngleBack = deviationAngleBack;
     int leafCount = 5;
 
     sf::CircleShape *leaf;
@@ -29,6 +31,8 @@ void Flower::FloverMedian()
 {
     float size = commonSize;
     tMedianPetals.scale(0, 0);
+    deviationAngleMedian = 90;
+    currentDeviationAngleMedian = deviationAngleMedian;
     int petalsCount = 5;
 
     sf::CircleShape *petal;
@@ -54,6 +58,8 @@ void Flower::FloverFront()
 {
     float size = commonSize * 0.66f;
     tInnerPetals.scale(0, 0);
+    deviationAngleFront = 100;
+    currentDeviationAngleFront = deviationAngleFront;
     int petalsCount = 10;
     
     sf::CircleShape *petal;
@@ -102,6 +108,7 @@ void Flower::Render()
     }
 }
 
+float deviationBack, deviationMedian, deviationFront;
 void Flower::Update()
 {
     switch (growingStatus)
@@ -130,6 +137,10 @@ void Flower::Update()
         {
             growingStatus = GrowingStatus::growing;
 
+            tBackLeaf.rotate(-deviationAngleBack, statisPos.x, statisPos.y);
+            tMedianPetals.rotate(-deviationAngleMedian, statisPos.x, statisPos.y);
+            tInnerPetals.rotate(-deviationAngleFront, statisPos.x, statisPos.y);
+
             for (sf::CircleShape *leaf : backLeaf) {
                 leaf->setFillColor(leaf->getFillColor() + sf::Color(0, 0, 0, 140));
                 leaf->setOutlineColor(leaf->getOutlineColor() + sf::Color(0, 0, 0, 90));
@@ -144,6 +155,32 @@ void Flower::Update()
                 petal->setFillColor(petal->getFillColor() + sf::Color(0, 0, 0, 140));
                 petal->setOutlineColor(petal->getOutlineColor() + sf::Color(0, 0, 0, 90));
             }
+        }
+
+        break;
+
+    case GrowingStatus::growing:
+
+        if (currentDeviationAngleBack > 0.05) {
+            deviationBack = (currentDeviationAngleBack * 13 / deviationAngleBack);
+            currentDeviationAngleBack -= deviationBack;
+            tBackLeaf.rotate(deviationBack, statisPos.x, statisPos.y);
+        }
+
+        if (currentDeviationAngleMedian > 0.05) {
+            deviationMedian = (currentDeviationAngleMedian * 7 / deviationAngleMedian);
+            currentDeviationAngleMedian -= deviationMedian;
+            tMedianPetals.rotate(deviationMedian, statisPos.x, statisPos.y);
+        }
+
+        if (currentDeviationAngleFront > 0.05) {
+            deviationFront = (currentDeviationAngleFront * 4 / deviationAngleFront);
+            currentDeviationAngleFront -= deviationFront;
+            tInnerPetals.rotate(deviationFront, statisPos.x, statisPos.y);
+        }
+
+        if (currentDeviationAngleFront <= 0.05 && currentDeviationAngleMedian <= 0.05 && currentDeviationAngleFront <= 0.05) {
+            Object::status = UpdateStatus::EndUpdate;
         }
 
         break;

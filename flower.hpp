@@ -25,14 +25,20 @@ class Flower : public Object
 
         vector<sf::CircleShape *> backLeaf;
         sf::Transform tBackLeaf;
+        float deviationAngleBack;
+        float currentDeviationAngleBack;
         void FloverBack();
 
         vector<sf::CircleShape *> medianPetals;
         sf::Transform tMedianPetals;
+        float deviationAngleMedian;
+        float currentDeviationAngleMedian;
         void FloverMedian();
 
         vector<sf::CircleShape *> innerPetals;
         sf::Transform tInnerPetals;
+        float deviationAngleFront;
+        float currentDeviationAngleFront;
         void FloverFront();
 
         GrowingStatus growingStatus = GrowingStatus::setSize;
