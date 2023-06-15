@@ -22,6 +22,7 @@ class Flower : public Object
         sf::RenderWindow *window;
 
         float commonSize = 30;
+        int rotateDirection;
 
         vector<sf::CircleShape *> backLeaf;
         sf::Transform tBackLeaf;
