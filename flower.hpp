@@ -3,23 +3,39 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <math.h>
+#include <iostream>
+
 #include "object.hpp"
 
 using namespace std;
+
+enum class GrowingStatus
+{
+    setSize,
+    growing
+};
 
 class Flower : public Object
 {
     private:
         sf::RenderWindow *window;
 
-        vector<sf::CircleShape> backLeaf;
+        float commonSize = 30;
+
+        vector<sf::CircleShape *> backLeaf;
+        sf::Transform tBackLeaf;
         void FloverBack();
 
-        vector<sf::CircleShape> medianPetals;
+        vector<sf::CircleShape *> medianPetals;
+        sf::Transform tMedianPetals;
         void FloverMedian();
 
-        vector<sf::CircleShape> innerPetals;
+        vector<sf::CircleShape *> innerPetals;
+        sf::Transform tInnerPetals;
         void FloverFront();
+
+        GrowingStatus growingStatus = GrowingStatus::setSize;
 
         sf::Vector2f statisPos;
         sf::Vector2f dynamicPos;
