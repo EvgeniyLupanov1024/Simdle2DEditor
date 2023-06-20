@@ -1,4 +1,4 @@
-Графический 2D редактор. В редаторе можно добавлять прямоугольники, цветы и отменять последнее внесённое изменение. Редактор написан с использованием библиотеки SFML.
+Графический 2D редактор. В редакторе можно добавлять прямоугольники, цветы и отменять последнее внесённое изменение. Редактор написан с использованием библиотеки SFML.
 
 <img alt="best_editor_main" align="middle" width="100%" src="https://raw.githubusercontent.com/LupanovEvgeniyHTML/LupanovEvgeniyHTML/main/projects_media/Simdle2DEditor/best_editor_main.gif"/>  
 
